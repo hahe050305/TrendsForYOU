@@ -28,7 +28,7 @@ body {
     color: #fff;
   }
   
-  /* Responsive styles */
+  /* Responsive styles 
   @media (max-width: 768px) {
     .navbar {
       flex-direction: column;
@@ -38,5 +38,50 @@ body {
     .container {
       padding: 0 10px;
     }
+  }*/
+
+
+@media (max-width: 768px) {
+  .App {
+    padding: 0;
+    margin: 0;
   }
+
+  .container {
+    padding: 10px;
+  }
+
+  .product-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .cart-item,
+  .product-card {
+    flex-direction: column;
+    width: 100% !important;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
   

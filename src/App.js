@@ -7,7 +7,7 @@ import HeroSection from './components/Hero/HeroSection';
 import Footer from './components/Footer/Footer';
 import ProductGrid from './components/Grid/ProductGrid';
 import Cart from './components/Cart/Cart';
-import DealsPage from './pages/deals';  // Import DealsPage component
+import DealsPage from './pages/deals';  
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './App.css';
@@ -16,7 +16,7 @@ import ComboPage from './pages/combo';
 import Payments from './components/Payment/Payment';
 import OrderTracking from './components/Order/Order';
 import ProductDetails from './components/Productdetail/Product';
-import SearchResults from './components/SearchResult/Result';
+import WelcomePage from './components/Welcome/Welcome';
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -39,9 +39,14 @@ function App() {
     <Router>
       <div className="App">
         <Navbar cartCount={cartItems.length} />
+
         <Routes>
+          {/* Welcome Page as the first route */}
+          <Route path="/" element={<WelcomePage />} />
+
+          {/* Actual Home Page */}
           <Route
-            path="/"
+            path="/home"
             element={
               <>
                 <HeroSection />
@@ -51,43 +56,31 @@ function App() {
               </>
             }
           />
+
           <Route
             path="/product"
             element={<ProductDetails handleAddToCart={handleAddToCart} />}
           />
+
           <Route
-            path="/Cart"
+            path="/cart"
             element={<Cart cartItems={cartItems} />}
           />
-          <Route
-            path="/deals"
-            element={<DealsPage />}
-          />
+
+          <Route path="/deals" element={<DealsPage />} />
+
+          <Route path="/combo" element={<ComboPage onAddToCart={handleAddToCart} />} />
 
           <Route
-            path="/combo"
-            element={<ComboPage />}
-          />
-          <Route
-            path="/category"  // New route for category page
-            element={<CategoryPage onAddToCart={handleAddToCart} />}  // Add CategoryPage component
+            path="/category"
+            element={<CategoryPage onAddToCart={handleAddToCart} />}
           />
 
-          <Route
-            path="/payment/"  // New route for category page
-            element={<Payments />}  // Add CategoryPage component
-          />
+          <Route path="/payment" element={<Payments />} />
 
-          <Route
-            path="/order"  // New route for category page
-            element={<OrderTracking />}  // Add CategoryPage component
-          />
-
-          <Route
-            path="/result"  // New route for category page
-            element={<SearchResults/>}  // Add CategoryPage component
-          />
+          <Route path="/order" element={<OrderTracking />} />
         </Routes>
+
         <Footer />
       </div>
     </Router>

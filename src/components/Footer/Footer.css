@@ -1,21 +1,158 @@
+/* Footer.css - minimalistic popup look & feel + footer */
 .footer {
-    padding: 20px;
-    background-color: mediumslateblue; 
-    color: white;
-    text-align: center;
+  padding: 18px 24px;
+  background: #f6f6f6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 19px;
+  color: #333;
+  border-top: 1px solid #e6e6e6;
+}
+
+.footer-links a {
+  margin-left: 12px;
+  color: gold;
+  text-decoration: none;
+  font-weight: bold;
+}
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+/* Overlay and modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 1200;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* top-ish placement */
+  padding-top: 4vh; /* appear near top */
+}
+
+/* Modal box: square-ish, rounded, white */
+.modal {
+  background: darkkhaki;
+  width: min(88vw, 520px);   /* responsive width */
+  height: min(80vh, 560px);  /* responsive, square-like on larger screens */
+  border-radius: 50px;
+  box-shadow: 0 14px 40px rgba(15,15,15,0.25);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 10px solid whitesmoke;
+}
+
+/* Close X top-right */
+.modal-close {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  color: #666;
+  padding: 6px;
+  border-radius: 6px;
+}
+.modal-close:hover { background: rgba(0,0,0,0.04); color: #222; }
+
+/* Header */
+.modal-header {
+  padding: 18px 22px 8px 22px;
+  border-bottom: 1px solid #f1f1f1;
+}
+.modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #111;
+}
+
+/* Content area with its own scrollbar */
+.modal-content {
+  padding: 12px 20px 18px 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 12px;
+  color: chartreuse;
+}
+
+.modal-scroll {
+  overflow-y: auto;
+  padding-right: 6px; /* space for scrollbar */
+  flex: 1;
+}
+
+/* modal body text */
+.modal-body {
+  color: #333;
+  font-size: 17px;
+  line-height: 1.55;
+  white-space: pre-line; /* respect line-breaks in text */
+}
+
+/* Actions area */
+.modal-actions {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* checkbox label style */
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #222;
+}
+
+/* buttons */
+.actions-row {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: #111;
+  color: white;
+  border-color: #111;
+}
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.btn-secondary {
+  background: transparent;
+  border: 1px solid #ddd;
+  color: #333;
+}
+
+/* small responsive tweaks */
+@media (max-width: 420px) {
+  .modal {
+    width: 95vw;
+    height: 85vh;
+    border-radius: 10px;
   }
-  
-  .footer-links {
-    margin-top: 10px;
-  }
-  
-  .footer-links a {
-    margin: 0 10px;
-    color: #febd69;
-    text-decoration: none;
-  }
-  
-  .footer-links a:hover {
-    text-decoration: underline;
-  }
-  
+  .modal-header { padding: 14px; }
+  .modal-content { padding: 12px; }
+}

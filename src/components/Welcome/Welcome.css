@@ -1,0 +1,90 @@
+/* Full page background */
+.welcome-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("/public/welcomePage/ecom1.jpg") 
+    no-repeat center center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Fade-out effect */
+.welcome-container.fade-out {
+  opacity: 0;
+}
+
+/* Dark overlay */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 20, 0.75);
+  z-index: 1;
+}
+
+/* Welcome text content */
+.welcome-content {
+  position: relative;
+  z-index: 2;
+  text-align: left;
+  color: #fff;
+  padding: 20px;
+  max-width: 800px;
+}
+
+/* Main Title */
+.main-title {
+  font-size: 4rem;
+  font-weight: 900;
+  letter-spacing: 3px;
+  color: #fff;
+  background: linear-gradient(90deg, #ff00ff, #00ffff, #ff00ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 2s linear infinite;
+  background-size: 200% auto;
+  /* animation-delay: 1s; */
+}
+
+/* Subtitle */
+.subtitle {
+  margin-top: 20px;
+  font-size: 2rem;
+  color: orange;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards 1.5s;
+  text-align: center;
+}
+
+/* Shimmer effect for title */
+@keyframes shimmer {
+  0% { background-position: -500px 0; }
+  100% { background-position: 500px 0; }
+}
+
+/* Fade-in for subtitle */
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .main-title {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+  }
+}

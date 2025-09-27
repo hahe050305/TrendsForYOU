@@ -4,8 +4,8 @@ import './Order.css';
 function OrderTracking() {
   const steps = [
     { label: 'Order Placed', status: 'completed' },
-    { label: 'Processing', status: 'completed' },
-    { label: 'Shipped', status: 'partial' },
+    { label: 'Processing', status: 'partial' },
+    { label: 'Shipped', status: 'pending' },
     { label: 'Out for Delivery', status: 'pending' },
     { label: 'Delivered', status: 'pending' },
   ];

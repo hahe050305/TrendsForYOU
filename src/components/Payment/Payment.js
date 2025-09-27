@@ -19,11 +19,10 @@ function Payments() {
   const [upiId, setUpiId] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
+  // Total price calculation in INR
   const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
-  const handleCouponChange = (e) => {
-    setCouponCode(e.target.value);
-  };
+  const handleCouponChange = (e) => setCouponCode(e.target.value);
 
   const applyCoupon = () => {
     if (couponCode === 'Santa_Dec25') {
@@ -36,16 +35,11 @@ function Payments() {
 
   const handleCardChange = (e) => {
     const { name, value } = e.target;
-    setCardDetails((prevDetails) => ({ ...prevDetails, [name]: value }));
+    setCardDetails((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handlePaypalChange = (e) => {
-    setPaypalEmail(e.target.value);
-  };
-
-  const handleUpiChange = (e) => {
-    setUpiId(e.target.value);
-  };
+  const handlePaypalChange = (e) => setPaypalEmail(e.target.value);
+  const handleUpiChange = (e) => setUpiId(e.target.value);
 
   const validateForm = () => {
     if (paymentMethod === 'Credit Card') {
@@ -90,7 +84,7 @@ function Payments() {
       </p>
       <form onSubmit={handleSubmit}>
         <div className="total-price">
-          <p>Total Price: ${totalPrice.toFixed(2)}</p>
+          <p>Total Price: ₹{totalPrice.toLocaleString('en-IN')}</p>
         </div>
 
         <label>
@@ -184,7 +178,7 @@ function Payments() {
 
         {discountedPrice < totalPrice && (
           <div className="discounted-price">
-            <p>Discounted Price: ${discountedPrice.toFixed(2)}</p>
+            <p>Discounted Price: ₹{discountedPrice.toLocaleString('en-IN')}</p>
           </div>
         )}
 

@@ -1,6 +1,9 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./Searchbar.css";
 import { useNavigate } from "react-router-dom";
+
+// Helper to standardize category IDs
+const slugify = (text) => text.toLowerCase().replace(/\s+/g, '-').trim();
 
 function SearchBar() {
   const [query, setQuery] = useState("");
@@ -10,7 +13,6 @@ function SearchBar() {
   const [placeholder, setPlaceholder] = useState("Search for products, categories...");
 
   const navigate = useNavigate();
-
 
   const placeholders = [
     "Search for mobiles, laptops, combo offers...",
@@ -25,9 +27,8 @@ function SearchBar() {
     const interval = setInterval(() => {
       setPlaceholder(placeholders[index]);
       index = (index + 1) % placeholders.length;
-    }, 2000); // Change placeholder every second
-
-    return () => clearInterval(interval); // Cleanup interval on component unmount
+    }, 2000);
+    return () => clearInterval(interval);
   }, []);
 
   const productData = [
@@ -60,80 +61,51 @@ function SearchBar() {
     { name: "Roadster Black Backbags", price: 800, categories: ["Backpacks"] },
   ];
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    console.log("Search Query:", query, "Price Filter:", priceFilter, "Category Filter:", categoryFilter);
+  // Function to filter suggestions based on input, price, and category
+  const filterSuggestions = (input = query, price = priceFilter, category = categoryFilter) => {
+    if (!input && !price && !category) {
+      setSuggestions([]);
+      return;
+    }
+
+    const priceLimit = parseInt(price);
+    const filtered = productData.filter(item => {
+      return (
+        (!input || item.name.toLowerCase().includes(input.toLowerCase())) &&
+        (!price || item.price <= priceLimit) &&
+        (!category || item.categories.includes(category))
+      );
+    });
+    setSuggestions(filtered);
   };
 
   const handleInputChange = (e) => {
     const input = e.target.value;
     setQuery(input);
-
-    if (input) {
-      const filteredSuggestions = productData.filter((item) => {
-        const priceLimit = parseInt(priceFilter);
-        return (
-          item.name.toLowerCase().includes(input.toLowerCase()) &&
-          (!priceFilter || item.price <= priceLimit) &&
-          (!categoryFilter || item.categories.includes(categoryFilter))
-        );
-      });
-      setSuggestions(filteredSuggestions);
-    } else {
-      setSuggestions([]);
-    }
+    filterSuggestions(input);
   };
 
   const handlePriceFilterChange = (e) => {
-    const newPriceFilter = e.target.value;
-    setPriceFilter(newPriceFilter);
-
-    if (query || categoryFilter) {
-      const priceLimit = parseInt(newPriceFilter);
-
-      const filteredSuggestions = productData.filter((item) => {
-        return (
-          item.name.toLowerCase().includes(query.toLowerCase()) &&
-          (!newPriceFilter || item.price <= priceLimit) &&
-          (!categoryFilter || item.categories.includes(categoryFilter))
-        );
-      });
-      setSuggestions(filteredSuggestions);
-    } else {
-      setSuggestions([]);
-    }
+    const price = e.target.value;
+    setPriceFilter(price);
+    filterSuggestions(query, price);
   };
 
   const handleCategoryFilterChange = (e) => {
-    const newCategoryFilter = e.target.value;
-    setCategoryFilter(newCategoryFilter);
-
-    if (query || priceFilter) {
-      const filteredSuggestions = productData.filter((item) => {
-        const priceLimit = parseInt(priceFilter);
-
-        return (
-          item.name.toLowerCase().includes(query.toLowerCase()) &&
-          (!priceFilter || item.price <= priceLimit) &&
-          (!newCategoryFilter || item.categories.includes(newCategoryFilter))
-        );
-      });
-      setSuggestions(filteredSuggestions);
-    } else {
-      setSuggestions([]);
-    }
+    const category = e.target.value;
+    setCategoryFilter(category);
+    filterSuggestions(query, priceFilter, category);
   };
 
   const handleSuggestionClick = (item) => {
-    setSuggestions([]); // Clear suggestions to hide the dropdown
-    navigate("/result", {
-      state: { query, priceFilter, categoryFilter },
-    });
+    setSuggestions([]);
+    const categoryId = slugify(item.categories[0]);
+    navigate("/Category", { state: { scrollToCategory: categoryId } });
   };
 
   return (
     <div className="search-bar-container">
-      <form className="search-bar" onSubmit={handleSearch}>
+      <form className="search-bar" onSubmit={(e) => e.preventDefault()}>
         <input
           type="text"
           placeholder={placeholder}
@@ -161,6 +133,7 @@ function SearchBar() {
         </select>
         <button type="submit">Search</button>
       </form>
+
       {suggestions.length > 0 && (
         <ul className="dropdown">
           {suggestions.map((item, index) => (
