@@ -10,12 +10,12 @@ function WelcomePage() {
     // Trigger fade-out after 3 seconds
     const timer1 = setTimeout(() => {
       setFadeOut(true);
-    }, 1900);
+    }, 2200);
 
     // Navigate after fade-out finishes (0.5s later)
     const timer2 = setTimeout(() => {
       navigate("/home"); 
-    }, 2200);
+    }, 3500);
 
     return () => {
       clearTimeout(timer1);
