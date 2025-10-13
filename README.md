@@ -1,10 +1,11 @@
-"TrendsForYou" 
-      - is a modern React-based e-commerce web app focused on simplicity, dynamic visuals, and smooth user interaction.
+**TrendsForYou**
+
+       - is a modern React-based e-commerce web app focused on simplicity, dynamic visuals, and smooth user interaction.
 
 
 It delivers a clean, intuitive shopping experience with smart ad displays and visually organized product sections.
 
-== Key Highlights ==
+**Key Highlights**
 
 1) Dynamic Ad Carousel – Automatically rotates ads at set time intervals, keeping the interface engaging.
 
@@ -20,17 +21,17 @@ It delivers a clean, intuitive shopping experience with smart ad displays and vi
 
 
 
-== Built With ==
+**Built With**
 
-  React.js –         Component-driven front-end
+  **React.js –         Component-driven front-end**
 
-  HTML5 & CSS3 –     Structure and styling
+  **HTML5 & CSS3 –     Structure and styling**
 
-  JavaScript (ES6) – App logic and dynamic features
+  **JavaScript (ES6) – App logic and dynamic features**
 
 
 
-== Quick guide ==
+**Quick guide**
 
 # Install dependencies
 npm install
@@ -40,4 +41,7 @@ npm start
 
 # Build for production
 npm run build
+
+
+Visit my live hosted website:-      **[TrendsForYOU]("https://trends-4-you-only4-you.onrender.com/")**
 
