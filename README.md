@@ -1,4 +1,4 @@
-**TrendsForYou**
+TrendsForYou:-
 
        - is a modern React-based e-commerce web app focused on simplicity, dynamic visuals, and smooth user interaction.
 
@@ -43,5 +43,6 @@ npm start
 npm run build
 
 
-Visit my live hosted website:-      **[TrendsForYOU]("https://trends-4-you-only4-you.onrender.com/")**
+
+Visit my live hosted website:-      **[TrendsForYOU](https://trends-4-you-only4-you.onrender.com/)**
 
