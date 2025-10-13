@@ -1,4 +1,4 @@
-TrendsForYou:-
+# TrendsForYou:-
 
 is a modern React-based e-commerce web app focused on simplicity, dynamic visuals, and smooth user interaction.
 
